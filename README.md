@@ -3,7 +3,7 @@
 A Spring Boot backend that receives bets, contributes each one to a matching jackpot pool, and
 evaluates bets for a jackpot reward.
 
-- **Java 21**, **Spring Boot 3.5**, **Maven**
+- **Java 21**, **Spring Boot 3.5**, **Gradle** (wrapper included)
 - **H2 in-memory** database for bets, jackpots, contributions and rewards
 - **Kafka** via Spring Kafka, with a **mock publisher** so the service runs with no broker at all
 
@@ -11,10 +11,11 @@ evaluates bets for a jackpot reward.
 
 ## Quick start
 
-Requires JDK 21+ and Maven. No database, broker or Docker needed.
+Requires only a JDK 21+. The Gradle wrapper downloads Gradle itself on first run, so there is
+nothing else to install — no database, no broker, no Docker.
 
 ```bash
-mvn spring-boot:run
+./gradlew bootRun
 ```
 
 The service starts on `http://localhost:8080` and seeds two jackpots. In another terminal:
@@ -27,7 +28,13 @@ The service starts on `http://localhost:8080` and seeds two jackpots. In another
 contribution rates, winning a jackpot, and seeing the pool reset. To run the tests:
 
 ```bash
-mvn test
+./gradlew test
+```
+
+To build the runnable jar (`build/libs/jackpot-service-1.0.0.jar`):
+
+```bash
+./gradlew build
 ```
 
 ---
@@ -209,7 +216,7 @@ To run against a real broker instead, start one and flip a single flag:
 
 ```bash
 docker compose up -d
-mvn spring-boot:run -Dspring-boot.run.arguments=--jackpot.kafka.enabled=true
+./gradlew bootRun --args='--jackpot.kafka.enabled=true'
 ```
 
 `jackpot.kafka.enabled` swaps `MockBetPublisher` for `KafkaBetPublisher` and activates
@@ -284,7 +291,7 @@ bet id up front, makes the outcome of asynchronous processing observable through
 
 ## Tests
 
-`mvn test` runs 35 tests:
+`./gradlew test` runs 35 tests:
 
 - **Calculator unit tests** pin the arithmetic of both strategies, including the decay floor, the
   chance ceiling, the guaranteed-win pool limit, and rounding.

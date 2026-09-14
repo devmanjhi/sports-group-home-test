@@ -2,7 +2,7 @@
 # Optional: a single-node Kafka broker for running the service against real Kafka.
 #
 #   docker compose up -d
-#   mvn spring-boot:run -Dspring-boot.run.arguments=--jackpot.kafka.enabled=true
+#   ./gradlew bootRun --args='--jackpot.kafka.enabled=true'
 #
 # Without this the service runs on its mock publisher and needs no broker at all.
 services:
