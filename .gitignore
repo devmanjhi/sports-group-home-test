@@ -1,15 +1,33 @@
-build/
+# Gradle
 .gradle/
+build/
+bin/
+
+# Keep Gradle wrapper JAR
 !gradle/wrapper/gradle-wrapper.jar
 
+# IntelliJ IDEA
 .idea/
 *.iml
 *.ipr
 *.iws
+
+# VS Code
 .vscode/
+
+# Eclipse
 .settings/
 .classpath
 .project
 
+# OS files
 .DS_Store
+Thumbs.db
+
+# Logs
 *.log
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
